@@ -18,4 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get secret
-        run: echo "Hello Staging World! Your secret is $STAGING_SECRET. This- $FAILED_SECRET -should be blank. The non-secret is $NOT_SECRET"
+        run: echo "Hello Staging World! Your secret is $STAGING_SECRET. This- $FAILED_SECRET -should be blank. The non-secret is $NOT_SECRET" >> /tmp/echod.txt
+
+      - name: Cat it back
+        run: cat /tmp/echod.txt
