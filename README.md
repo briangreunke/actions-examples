@@ -5,6 +5,7 @@
 # Controls
 - no push to main, only merge
 - no push to staging, only merge
+- require review for the above
 
 # Deploy to production workflow
 - if branch is main
@@ -14,4 +15,4 @@
 - if branch is staging
     - deploy to staging
 
-# 
+# Create a branch
