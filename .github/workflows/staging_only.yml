@@ -11,7 +11,7 @@ on:
 env:
   STAGING_SECRET: ${{ secrets.STAGING_SECRET }}
   FAILED_SECRET: ${{ secrets.PROD_SECRET }}
-  NOT_SECRET: foobar
+  NOT_SECRET: abcdefg
 
 jobs:
   test-secrets:
