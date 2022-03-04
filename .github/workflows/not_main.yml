@@ -3,7 +3,13 @@
 # Run unit tests, run integration tests in labs env
 
 name: Everything besides prod and staging
-on: push
+on:
+  push:
+    branches:
+      - '*'
+      - '!staging'
+      - '!master'
+
 jobs:
   my-job:
     runs-on: ubuntu-latest

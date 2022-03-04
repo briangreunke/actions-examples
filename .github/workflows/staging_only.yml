@@ -4,7 +4,10 @@
 # How can we validate that the creds and infrastructure exist?
 
 name: Staging Only
-on: push
+on:
+  push:
+    branches:
+      - staging
 jobs:
   my-job:
     runs-on: ubuntu-latest
