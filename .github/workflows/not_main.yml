@@ -2,7 +2,7 @@
 
 # Run unit tests, run integration tests in labs env
 
-name: hello-world
+name: Everything besides prod and staging
 on: push
 jobs:
   my-job:

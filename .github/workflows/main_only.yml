@@ -3,7 +3,7 @@
 # No need to run unit tests
 # How can we validate that the creds and infrastructure exist?
 
-name: hello-world
+name: Production only
 on: push
 jobs:
   my-job:
