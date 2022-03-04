@@ -1,3 +1,12 @@
 # This should trigger for changes to "dev" branches (not production and not staging)
 
 # Run unit tests, run integration tests in labs env
+
+name: hello-world
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-step
+        run: echo "Hello Some Branch World!"

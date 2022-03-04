@@ -2,3 +2,12 @@
 
 # No need to run unit tests
 # How can we validate that the creds and infrastructure exist?
+
+name: hello-world
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-step
+        run: echo "Hello Staging World!"
