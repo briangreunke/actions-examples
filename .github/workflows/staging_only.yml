@@ -16,3 +16,8 @@ jobs:
         env:
           super_secret: ${{ secrets.STAGING_SECRET }}
         run: echo "Hello Staging World!"
+
+      - name: Secret fail
+        env:
+          failed_secret: ${{ secrets.PROD_SECRET }}
+        run: echo "Can't see this one!"
