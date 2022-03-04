@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get secret
-        with: # Set the secret as an input
+        env:
           super_secret: ${{ secrets.STAGING_SECRET }}
-        
-      - name: Do Step
         run: echo "Hello Staging World!"
