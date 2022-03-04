@@ -14,10 +14,10 @@ jobs:
     steps:
       - name: Get secret
         env:
-          super_secret: ${{ secrets.STAGING_SECRET }}
-        run: echo "Hello Staging World! Your secret is ${super_secret}"
+          STAGING_SECRET: ${{ secrets.STAGING_SECRET }}
+        run: echo "Hello Staging World! Your secret is $STAGING_SECRET"
 
       - name: Secret fail
         env:
-          failed_secret: ${{ secrets.PROD_SECRET }}
-        run: echo "Can't see this one ${failed_secret}"
+          FAILED_SECRET: ${{ secrets.PROD_SECRET }}
+        run: echo "Can't see this one $FAILED_SECRET"
