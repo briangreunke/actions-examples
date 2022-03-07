@@ -15,7 +15,7 @@ jobs:
     environment: staging  # Set the `environment` key to use 
     steps:
       - name: Staging secret
-        run: echo "Staging Secret - ${{ secrets.STAGING_SECRET }}"
+        run: echo "You should see three asterisks \"${{ secrets.STAGING_SECRET }}\""
 
       - name: Production secret
-        run: echo "Shouldn't be able to see - ${{ secrets.PROD_SECRET }}"
+        run: echo "You will see an empty string \"${{ secrets.PROD_SECRET }}\""
