@@ -1,11 +1,22 @@
 # Set up
-- Secrets are stored by branch
+## Environments
+Define different Github environments
+- Testing: `test`
+- Staging: `staging`
+- Production: `prod`
 
+## Secrets
+Secrets are stored per environment
+- Testing: `TEST_SECRET`
+- Staging: `STAGING_SECRET`
+- Production: `PROD_SECRET`
 
-# Controls
-- no push to main, only merge
-- no push to staging, only merge
-- require review for the above
+## Controls
+- Require a pull request before merging to `main`
+- Require a pull request before merging to `staging`
+- Require review in the above pull requests
+- Also require for admins
+
 
 # Deploy to production workflow
 - if branch is main
