@@ -24,4 +24,7 @@ jobs:
         run: echo "You should see three asterisks \"${{ secrets.STAGING_SECRET }}\""
 
       - name: Production secret
-        run: echo "You will see an empty string \"${{ secrets.PROD_SECRET }}\""
+        env:
+          PROD_SECRET: ${{ secrets.PROD_SECRET }}
+        if: env.PROD_SECRET == null
+        run: echo "Product secret is inaccessible"
