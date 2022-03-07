@@ -1,0 +1,34 @@
+# This should only trigger for changes to the staging branch
+
+# No need to run unit tests
+# How can we validate that infrastructure exist?
+
+name: Staging Only
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  validate-secrets-fail:
+    runs-on: ubuntu-latest
+    environment: staging  # Set the `environment` key to use 
+
+    steps:
+      # Ensure that other env secrets are inaccessible
+      - name: Production secret
+        env:
+          PROD_SECRET: ${{ secrets.PROD_SECRET }}
+        if: env.PROD_SECRET != null
+        run: |
+          echo "Success! Product secret is inaccessible. Will exit now!"
+          exit 1
+
+  validate-infrastructure-never-run:
+    # This should never run because the previous job should fail ...
+    needs: validate-secrets
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Validate required infrastructure
+        run: echo "Running Python script to validate infra ..."
