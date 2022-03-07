@@ -10,21 +10,33 @@ on:
       - staging
 
 jobs:
-  test-secrets:
+  validate-secrets:
     runs-on: ubuntu-latest
     environment: staging  # Set the `environment` key to use 
+
     steps:
+
+      # Ensure that the expected secret is accessible
       - name: Check if secret exists
         env:
           STAGING_SECRET: ${{ secrets.STAGING_SECRET }}
         if: env.STAGING_SECRET == null
-        run: exit 1
-        
-      - name: Staging secret
-        run: echo "You should see three asterisks \"${{ secrets.STAGING_SECRET }}\""
+        run: |
+          echo "Error: Staging Secret is inaccesible
+          exit 1
 
+      # Ensure that other env secrets are inaccessible
       - name: Production secret
         env:
           PROD_SECRET: ${{ secrets.PROD_SECRET }}
         if: env.PROD_SECRET == null
-        run: echo "Product secret is inaccessible"
+        run: echo "Success! Product secret is inaccessible"
+
+  deploy:
+    needs: validate-secrets
+    runs-on: ubuntu-latest
+    environment: staging  # Set the `environment` key to use 
+
+    steps:
+      - name: Deploy
+        run: echo "Deploying to staging ..."
