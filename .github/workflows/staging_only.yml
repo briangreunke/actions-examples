@@ -14,6 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging  # Set the `environment` key to use 
     steps:
+      - name: Check if secret exists
+        env:
+          STAGING_SECRET: ${{ secrets.STAGING_SECRET }}
+        if: env.STAGING_SECRET == null
+        run: exit 1
+        
       - name: Staging secret
         run: echo "You should see three asterisks \"${{ secrets.STAGING_SECRET }}\""
 
