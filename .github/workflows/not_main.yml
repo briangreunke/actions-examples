@@ -11,7 +11,7 @@ on:
       - '!master'
 
 jobs:
-  my-job:
+  not-main-job:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
