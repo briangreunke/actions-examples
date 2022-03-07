@@ -19,7 +19,7 @@ jobs:
       - name: Production secret
         env:
           PROD_SECRET: ${{ secrets.PROD_SECRET }}
-        if: env.PROD_SECRET != null
+        if: env.PROD_SECRET == null
         run: |
           echo "Success! Product secret is inaccessible. Will exit now!"
           exit 1
