@@ -9,10 +9,28 @@ on:
       - '*'
       - '!staging'
       - '!master'
+      - '!main'
 
 jobs:
-  not-main-job:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello Some Branch World!"
+      - name: Run Unit Tests
+        run: echo "Running unit tests"
+
+  validate-infrastructure:
+    needs: unit-tests
+    needs: validate-secrets
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Validate required infrastructure
+        run: echo "Running Python script to validate infra ..."
+
+  integration-tests:
+    needs: validate-infrastructure
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Run Integration Tests
+        run: echo "Running integration tests"

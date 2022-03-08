@@ -12,7 +12,11 @@ Secrets are stored per environment
 - Production: `PROD_SECRET`
 
 ## Controls
+### Main
 - Require a pull request before merging to `main`
+- Only allow merge from `staging`
+
+### Staging
 - Require a pull request before merging to `staging`
 - Require review in the above pull requests
 - Also require for admins
@@ -25,5 +29,3 @@ Secrets are stored per environment
 # Deploy to staging workflow
 - if branch is staging
     - deploy to staging
-
-# Create a branch
