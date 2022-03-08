@@ -3,6 +3,7 @@
 Define different Github environments
 - Testing: `test`
 - Staging: `staging`
+    - Also set `fail` as a "Deployment branch" to demonstrate a failed secret
 - Production: `prod`
 
 ## Secrets
