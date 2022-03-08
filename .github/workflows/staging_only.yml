@@ -8,8 +8,6 @@ on:
   push:
     branches:
       - staging
-  pull_request:
-
 
 jobs:
   validate-secrets:
