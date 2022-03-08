@@ -15,21 +15,27 @@ Secrets are stored per environment
 ## Controls
 ### Main
 - Require a pull request before merging to `main`
-- Only allow merge from `staging`
+- Only allow merge from `staging` (right now a manual process)
 
 ### Staging
 - Require a pull request before merging to `staging`
-- Require review in the above pull requests
 - Also require for admins
 
+# Feature update
+- Create new branch
+- update, commit, push
+- run unit and integration tests
+- merge to `staging`
+- merge `staging` to `master`
 
 # Deploy to production workflow
 - if branch is main
+    - validate secrets exist
+    - validate infrastructure
     - deploy to prod
 
 # Deploy to staging workflow
 - if branch is staging
+    - validate secrets exist
+    - validate infrastructure
     - deploy to staging
-
-# TODO:
-- How to trigger on merge to master?
