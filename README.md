@@ -29,3 +29,6 @@ Secrets are stored per environment
 # Deploy to staging workflow
 - if branch is staging
     - deploy to staging
+
+# TODO:
+- How to trigger on merge to master?
