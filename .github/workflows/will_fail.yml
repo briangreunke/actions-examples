@@ -3,11 +3,11 @@
 # No need to run unit tests
 # How can we validate that infrastructure exist?
 
-name: Staging Only - Fail
+name: Fail on purpose
 on:
   push:
     branches:
-      - staging
+      - fail
 
 jobs:
   validate-secrets-fail:

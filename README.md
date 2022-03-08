@@ -3,6 +3,7 @@
 Define different Github environments
 - Testing: `test`
 - Staging: `staging`
+    - Also set `fail` as a "Deployment branch" to demonstrate a failed secret
 - Production: `prod`
 
 ## Secrets
@@ -29,3 +30,6 @@ Secrets are stored per environment
 # Deploy to staging workflow
 - if branch is staging
     - deploy to staging
+
+# TODO:
+- How to trigger on merge to master?
