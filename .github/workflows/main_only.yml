@@ -20,18 +20,11 @@ jobs:
       # Ensure that the expected secret is accessible
       - name: Check if secret exists
         env:
-          PRODUCTION_SECRET: ${{ secrets.PRODUCTION_SECRET }}
-        if: env.PRODUCTION_SECRET == null
+          PROD_SECRET: ${{ secrets.PROD_SECRET }}
+        if: env.PROD_SECRET == null
         run: |
           echo "Error: Production Secret is inaccesible
           exit 1
-
-      # Ensure that other env secrets are inaccessible
-      - name: Production secret
-        env:
-          PROD_SECRET: ${{ secrets.PROD_SECRET }}
-        if: env.PROD_SECRET == null
-        run: echo "Success! Product secret is inaccessible"
 
   validate-infrastructure:
     needs: validate-secrets

@@ -18,6 +18,18 @@ jobs:
       - name: Run Unit Tests
         run: echo "Running unit tests"
 
+  validate-secrets:
+    runs-on: ubuntu-latest
+    environment: test  # Set the `environment` key to use 
+    steps:
+      - name: Check if secret exists
+        env:
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        if: env.TEST_SECRET == null
+        run: |
+          echo "Error: Test Secret is inaccesible
+          exit 1
+
   validate-infrastructure:
     needs: unit-tests
     needs: validate-secrets
