@@ -31,8 +31,9 @@ jobs:
           exit 1
 
   validate-infrastructure:
-    needs: unit-tests
-    needs: validate-secrets
+    needs: 
+      - unit-tests
+      - validate-secrets
     runs-on: ubuntu-latest
     environment: test
     steps:
