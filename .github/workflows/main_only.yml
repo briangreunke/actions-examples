@@ -1,4 +1,42 @@
-# This should only trigger for changes to main
+# This should only trigger for changes to the staging branch
 
 # No need to run unit tests
-# How can we validate that the creds and infrastructure exist?
+
+name: Production Only
+on:
+  push:
+    branches:
+      - prod
+
+
+jobs:
+  validate-secrets:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Check if secret exists
+        env:
+          PROD_SECRET: ${{ secrets.PROD_SECRET }}
+        if: env.PROD_SECRET == null
+        run: |
+          echo "Error: Production Secret is inaccesible
+          exit 1
+
+  validate-infrastructure:
+    needs: validate-secrets
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Validate required infrastructure
+        run: echo "Running Python script to validate infra ..."
+
+  deploy-production:
+    needs: validate-infrastructure
+    runs-on: ubuntu-latest
+    environment: 
+      name: prod
+      url: https://prod.app.meetascent.com
+
+    steps:
+      - name: Deploy
+        run: echo "Deploying to production ..."

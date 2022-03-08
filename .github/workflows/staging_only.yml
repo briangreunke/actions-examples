@@ -1,4 +1,52 @@
 # This should only trigger for changes to the staging branch
 
 # No need to run unit tests
-# How can we validate that the creds and infrastructure exist?
+# How can we validate that infrastructure exist?
+
+name: Staging Only
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  validate-secrets:
+    runs-on: ubuntu-latest
+    environment: staging  # Set the `environment` key to use 
+
+    steps:
+
+      # Ensure that the expected secret is accessible
+      - name: Check if secret exists
+        env:
+          STAGING_SECRET: ${{ secrets.STAGING_SECRET }}
+        if: env.STAGING_SECRET == null
+        run: |
+          echo "Error: Staging Secret is inaccesible
+          exit 1
+
+      # Ensure that other env secrets are inaccessible
+      - name: Production secret
+        env:
+          PROD_SECRET: ${{ secrets.PROD_SECRET }}
+        if: env.PROD_SECRET == null
+        run: echo "Success! Product secret is inaccessible"
+
+  validate-infrastructure:
+    needs: validate-secrets
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Validate required infrastructure
+        run: echo "Running Python script to validate infra ..."
+
+  deploy-staging:
+    needs: validate-infrastructure
+    runs-on: ubuntu-latest
+    environment: 
+      name: staging
+      url: https://staging.app.meetascent.com
+
+    steps:
+      - name: Deploy
+        run: echo "Deploying to staging ..."
