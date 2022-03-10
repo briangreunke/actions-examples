@@ -19,12 +19,14 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'
-    - run: python -m pip install pandas
+        cache-dependency-path: 'requirements/*.txt'
+    - run: python -m pip -r requirements/test.txt
 
     - name: Use pandas
       run: python -c "import pandas"
 
   test-pip-again:
+    needs: test-pip
     runs-on: ubuntu-latest
     steps:
     - name: "Checkout GitHub Action"
@@ -35,7 +37,8 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'
-    - run: python -m pip install pandas
+        cache-dependency-path: 'requirements/*.txt'
+    - run: python -m pip -r requirements/test.txt
 
     - name: Use pandas
       run: python -c "import pandas"
