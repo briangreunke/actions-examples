@@ -25,12 +25,12 @@ jobs:
         git checkout update-random-number 2>/dev/null || git checkout -b update-random-number
 
     - name: Update the random number
-      run: python update_random_number.py
+      run: python update_timestamp.py --file now.txt
 
     
 
     - name: Update the repo
       run: |
-        git add random-number
+        git add now.txt
         git commit -m "Updated the file from a Github Action"
         git push origin update-random-number
