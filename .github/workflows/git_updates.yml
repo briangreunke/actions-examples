@@ -5,6 +5,9 @@ name: Update the repo with changes from the action
 
 on: workflow_dispatch
 
+env:
+  BRANCH_NAME: update-timestamp
+  OUTPUT_NAME: now.txt
 
 jobs:
   update-repo:
@@ -22,15 +25,15 @@ jobs:
       run: |
         git config user.name "GitHub Actions Automation"
         git config user.email "<>"
-        git checkout update-random-number 2>/dev/null || git checkout -b update-random-number
+        git checkout ${BRANCH_NAME} 2>/dev/null || git checkout -b ${BRANCH_NAME}
 
     - name: Update the random number
-      run: python update_timestamp.py --file now.txt
+      run: python update_timestamp.py --file ${OUTPUT_NAME}
 
     
 
     - name: Update the repo
       run: |
-        git add now.txt
+        git add ${OUTPUT_NAME}
         git commit -m "Updated the file from a Github Action"
-        git push origin update-random-number
+        git push origin ${BRANCH_NAME}
