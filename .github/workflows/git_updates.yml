@@ -1,0 +1,33 @@
+# This workflow will update something in the repo, stage it, commit it, and push it
+
+name: Update the repo with changes from the action
+
+
+on: workflow_dispatch
+
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.9"
+
+    - name: Update the random number
+      run: python update_random_number.py
+
+    - name: Setup git config
+      run: |
+        git config user.name "GitHub Actions Automation"
+        git config user.email "<>"
+
+    - name: Update the repo
+      run: |
+        git add random-number
+        git commit -m "Updated the file from a Github Action"
+        git push origin master
