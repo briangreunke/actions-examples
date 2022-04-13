@@ -18,16 +18,19 @@ jobs:
       with:
         python-version: "3.9"
 
-    - name: Update the random number
-      run: python update_random_number.py
-
-    - name: Setup git config
+    - name: Setup git
       run: |
         git config user.name "GitHub Actions Automation"
         git config user.email "<>"
+        git checkout -b update-random-number
+
+    - name: Update the random number
+      run: python update_random_number.py
+
+    
 
     - name: Update the repo
       run: |
         git add random-number
         git commit -m "Updated the file from a Github Action"
-        git push origin master
+        git push origin update-random-number
