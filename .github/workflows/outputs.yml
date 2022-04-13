@@ -1,0 +1,49 @@
+name: Do things
+on: push
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      the-output: ${{ steps.step-1.outputs.the-output }} # map step output to job output
+    steps:
+      - id: step-1
+        name: send url to other job
+        env:
+          toot: woot
+        run: echo "::set-output name=the-output::${{ env.toot }}"
+
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - run: echo ${{ needs.job1.outputs.the-output }}
+        with:
+          the-output: ${{ needs.job1.outputs.the-output }} # grab job output here
+
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add to env
+        run: echo "FOO=$(echo foo)" >> ${GITHUB_ENV}
+
+      - name: Check env
+        run: echo "FOO = ${{ env.FOO }}"
+
+      - name: Check another env
+        run: echo "BAR=$(echo)" >> ${GITHUB_ENV}
+
+      - name: Check env
+        run: |
+          if [[ $BAR == "" ]]; then
+            echo "BAR = ${{ env.BAR }}"
+          fi
+
+      - name: Check another env
+        run: echo "BAZ=$(echo baz)" >> ${GITHUB_ENV}
+
+      - name: Check env
+        run: |
+          if [[ $BAZ == "" ]]; then
+            echo "ERROR BAZ = ${{ env.BAZ }}"
+          fi
