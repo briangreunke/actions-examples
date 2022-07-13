@@ -1,0 +1,16 @@
+# Define a job/steps in another file and reference it
+name: Composite job demo
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  a-composite-job:
+    name: Example composite job
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/workflows/modules/sub-job.yml
