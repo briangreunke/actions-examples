@@ -1,7 +1,7 @@
 # Define a job/steps in another file and reference it
 name: Composite job demo
 on:
-  on: workflow_dispatch
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -14,4 +14,4 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: ./.github/workflows/modules/sub-job.yml
+    - uses: ./.github/workflows/modules/sub-job-1
