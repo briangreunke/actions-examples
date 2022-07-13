@@ -1,6 +1,7 @@
 # Define a job/steps in another file and reference it
 name: Composite job demo
 on:
+  on: workflow_dispatch
   push:
     branches:
       - master
