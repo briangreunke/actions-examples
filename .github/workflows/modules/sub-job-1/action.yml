@@ -3,5 +3,6 @@ description: "Checks out the repository and does something"
 runs:
   using: "composite"
   steps: 
-  - run: |
-      echo "Doing something"
+    - name: Demo
+      shell: bash
+      run: echo "Doing something"
