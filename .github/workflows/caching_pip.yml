@@ -4,7 +4,7 @@ on:
   - push
 
 env:
-  PYTHON_VERSION: "3.9"                 # set this to the python version to use (supports 3.6, 3.7, 3.8)
+  PYTHON_VERSION: "3.11"
 
 jobs:
   test-pip:
@@ -12,10 +12,10 @@ jobs:
     steps:
 
     - name: "Checkout GitHub Action"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'
@@ -30,10 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: "Checkout GitHub Action"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'

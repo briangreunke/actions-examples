@@ -1,0 +1,79 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+      - "bugfix/**"
+      - "hotfix/**"
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  api-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          echo "Do Python dependencies installation here"
+
+      - name: Check all pre-pre-commit hooks
+        run: echo "Check pre-commit"
+
+  ui-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install Node.js dependencies
+        run: echo "Do UI dependencies installation here"
+
+      - name: Run JavaScript tests
+        run: echo "Do JavaScript tests here"
+
+      - name: Build Svelte UI
+        run: echo "Do Svelte UI build here"
+
+  deploy-dev:
+    needs: 
+      - api-ci
+      - ui-ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to Dev Environment
+        run: |
+          # Add your deployment script here
+          echo "Deploying to Dev Environment"
+
+  deploy-prod:
+    needs: 
+      - api-ci
+      - ui-ci
+    if: github.event_name == 'release' && github.event.action == 'published'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to Production
+        run: |
+          # Add your production deployment script here
+          echo "Deploying to Production Environment"
