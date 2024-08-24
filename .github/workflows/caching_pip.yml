@@ -1,7 +1,7 @@
 name: Demonstrate caching
 
 on:
-  - push
+  workflow_dispatch:
 
 env:
   PYTHON_VERSION: "3.11"
