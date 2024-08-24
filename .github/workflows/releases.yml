@@ -50,7 +50,9 @@ jobs:
         run: echo "Do Svelte UI build here"
 
   deploy-dev:
-    needs: ci
+    needs: 
+      - api-ci
+      - ui-ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -62,7 +64,9 @@ jobs:
           echo "Deploying to Dev Environment"
 
   deploy-prod:
-    needs: ci
+    needs: 
+      - api-ci
+      - ui-ci
     if: github.event_name == 'release' && github.event.action == 'published'
     runs-on: ubuntu-latest
     environment: production
