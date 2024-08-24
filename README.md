@@ -39,3 +39,11 @@ Secrets are stored per environment
     - validate secrets exist
     - validate infrastructure
     - deploy to staging
+
+# Releases
+- Runs CI on pushes to pattern named branches
+  - feature
+  - bugfix
+  - hotfix
+- Runs CD (dev) on merge to main
+- Runs CD (prod) on release
